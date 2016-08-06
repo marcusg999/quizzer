@@ -10,8 +10,9 @@
 
     $query = "SELECT * FROM 'questions'
                 WHERE questions_number = $number";
+
       //GET result
-    $result = $mysqli->query($query) or die ($mysqli->error._LINE_);
+    $result = $mysqli->query($query) or die ($mysqli->error.__LINE__);
 
     $question = $result->fetch_assoc();
       /*
@@ -21,7 +22,9 @@
                 WHERE questions_number = $number";
 
       //Get Results
-      $choices = $mysqli->query($query) or die ($mysqli->error._LINE_);
+      $choices = $mysqli->query($query) or die ($mysqli->error.__LINE__);
+
+
       ?>
 
 <!DOCTYPE html>
@@ -41,14 +44,14 @@
         <div class="container">
             <div class="current">Question 1 of 5</div>
             <p class="question">
-                What does PHP stand for?
+               <?php echo $question['text']; ?>
             </p>
             <form method = "post" action="process.php">
                 <ul class="choices">
-                  <li><input name="choice" type="radio" value="1" />PHP:PHP Hypertext PreProcessor</li>
-                  <li><input name="choice" type="radio" value="1" />Private Home Page</li>
-                  <li><input name="choice" type="radio" value="1" />Personal Home Page</li>
-                  <li><input name="choice" type="radio" value="1" />PHP:PHP Hypertext Processor</li>
+                    <?php while ($row = $choices->fetch_assoc()): ?>
+                        <li><input type="radio" name="choice" value="<?php echo $row['id']; ?>" /> <?php echo $row['text']; ?></li>
+                    <?php endwhile; ?>
+
                 </ul>
                 <input type="submit" name="submit">
                 <input type="hidden" name="number" value="<?php echo $number; ?>" />
