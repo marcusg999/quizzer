@@ -1,6 +1,7 @@
 
 <?php include 'database.php'; ?>
 <?php
+
     //Set Question number
     $number = (int) $_GET['n'];
 

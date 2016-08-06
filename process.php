@@ -9,8 +9,35 @@
     if($_POST){
         $number = $_POST['number'];
         $selected_choice = $_POST['choice'];
+        $next = $number++;
 
-        echo $number.'<br>';
-        echo $selected_choice;
-    }
+        /*
+        * Get correct Choice
+        */
+
+        $query = "SELCT * FROM choices
+                    WHERE question_number = $number AND is correct = 1";
+
+        //Get Result
+        $result = $mysqli->query($query) or die ($mysqli->error.__LINE__);
+
+        //Get row
+        $row = $result->fetch_assoc();
+
+        //Set correct choice
+        $correct_choice = $row['id'];
+
+        //Compare
+        if ($correct_choice == $selected_choice) {
+            //Answer is correct
+            $_SESSION['score']++;
+        }
+
+        if($number == $total){
+            header("Location: final.php");
+        } else {
+            header ("Location: question.php?n= next");
+        }
+}
+
 
