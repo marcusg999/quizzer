@@ -1,3 +1,29 @@
+
+<?php include 'database.php'; ?>
+<?php
+    //Set Question number
+    $number = (int) $_GET['n'];
+
+    /*
+    * Get Question
+    */
+
+    $query = "SELECT * FROM 'questions'
+                WHERE questions_number = $number";
+      //GET result
+    $result = $mysqli->query($query) or die ($mysqli->error._LINE_);
+
+    $question = $result->fetch_assoc();
+      /*
+    * Get choices
+    */
+    $query = "SELECT * FROM 'choices'
+                WHERE questions_number = $number";
+
+      //Get Results
+      $choices = $mysqli->query($query) or die ($mysqli->error._LINE_);
+      ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +51,8 @@
                   <li><input name="choice" type="radio" value="1" />PHP:PHP Hypertext Processor</li>
                 </ul>
                 <input type="submit" name="submit">
-
+                <input type="hidden" name="number" value="<?php echo $number; ?>" />
+              </form>
             </div>
         </div>
     </main>
