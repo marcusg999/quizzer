@@ -8,22 +8,22 @@
     * Get Question
     */
 
-    $query = "SELECT * FROM 'questions'
-                WHERE questions_number = $number";
+    $query = "SELECT * FROM questions
+                WHERE question_number = $number";
 
       //GET result
     $result = $mysqli->query($query) or die ($mysqli->error.__LINE__);
 
     $question = $result->fetch_assoc();
+
       /*
     * Get choices
     */
-    $query = "SELECT * FROM 'choices'
-                WHERE questions_number = $number";
+    $query = "SELECT * FROM choices
+                WHERE question_number = $number";
 
       //Get Results
       $choices = $mysqli->query($query) or die ($mysqli->error.__LINE__);
-
 
       ?>
 
