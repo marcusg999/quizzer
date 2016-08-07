@@ -9,14 +9,24 @@
     if($_POST){
         $number = $_POST['number'];
         $selected_choice = $_POST['choice'];
-        $next = $number++;
+        $next = $number+1;
+
+
+        /*
+        * Get total questions
+        */
+        $query = "SELECT * FROM questions";
+
+        //Get Results
+        $results = $mysqli->query($query) or die ($mysqli->error.__LINE__);
+        $total = $results->num_rows;
 
         /*
         * Get correct Choice
         */
 
-        $query = "SELCT * FROM choices
-                    WHERE question_number = $number AND is correct = 1";
+        $query = "SELECT * FROM choices
+                    WHERE question_number = $number AND is_correct = 1";
 
         //Get Result
         $result = $mysqli->query($query) or die ($mysqli->error.__LINE__);
@@ -30,13 +40,15 @@
         //Compare
         if ($correct_choice == $selected_choice) {
             //Answer is correct
-            $_SESSION['score']++;
+            $_SESSION['score']+1;
         }
 
+        //Check if last question
         if($number == $total){
             header("Location: final.php");
+            exit();
         } else {
-            header ("Location: question.php?n= next");
+            header("Location: question.php?n=$next");
         }
 }
 

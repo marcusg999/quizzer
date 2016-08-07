@@ -1,9 +1,18 @@
 
 <?php include 'database.php'; ?>
+<?php session_start()?>
 <?php
 
     //Set Question number
     $number = (int) $_GET['n'];
+    /*
+    * Get total questions
+    */
+    $query = "SELECT * FROM questions";
+
+    //Get Results
+    $results = $mysqli->query($query) or die ($mysqli->error.__LINE__);
+    $total = $results->num_rows;
 
     /*
     * Get Question
@@ -43,7 +52,7 @@
     </header>
     <main>
         <div class="container">
-            <div class="current">Question 1 of 5</div>
+            <div class="current">Question <?php echo $question['question_number']; ?> of <?php echo $total; ?></div>
             <p class="question">
                <?php echo $question['text']; ?>
             </p>
