@@ -1,5 +1,5 @@
 <?php include 'database.php'; ?>
-<?php session_start()?>
+<?php session_start(); ?>
 <?php
   /*
   * Get The Total Number of questions

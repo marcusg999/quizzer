@@ -1,6 +1,6 @@
 
 <?php include 'database.php'; ?>
-<?php session_start()?>
+<?php session_start(); ?>
 <?php
 
     //Set Question number
@@ -13,6 +13,7 @@
     //Get Results
     $results = $mysqli->query($query) or die ($mysqli->error.__LINE__);
     $total = $results->num_rows;
+    $next = $total +1;
 
     /*
     * Get Question

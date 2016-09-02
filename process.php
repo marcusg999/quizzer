@@ -15,6 +15,7 @@
         /*
         * Get total questions
         */
+
         $query = "SELECT * FROM questions";
 
         //Get Results
@@ -40,7 +41,7 @@
         //Compare
         if ($correct_choice == $selected_choice) {
             //Answer is correct
-            $_SESSION['score']+1;
+            $_SESSION['score']++;
         }
 
         //Check if last question
